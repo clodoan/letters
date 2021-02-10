@@ -1,9 +1,53 @@
 var sketch1 = function(p) {
+  
+  p.canvasWidth = 1600;
+  p.canvasHeight = 800;
+  p.lineHeight = 48;
+  p.sep = 40;
+  p.letW = 16;
+  p.t = 0;
+
+  p.setup = function() {
+    p.createCanvas(p.canvasWidth, p.canvasHeight);
+  }
+
+
+  p.createNoise = function(index) {
+    return 100/p.noise(index) - 10;
+  }
+
+  p.draw = function() {
+    p.background(51);
+    p.t++;
+
+    for (var i = 0; i * p.sep < p.canvasWidth; i++) {
+      for (var j = 0; j * p.lineHeight < p.canvasHeight; j++) {
+        p.x = i * p.sep;
+        p.y = j * p.lineHeight;
+        p.noFill()
+        p.stroke('#fff')
+    
+        p.curve (
+          p.createNoise(i) + p.x,
+          p.createNoise(i * 500) + p.y,
+          p.x,
+          p.y + p.lineHeight,
+          p.x - 16,
+          p.y + 40,
+          p.createNoise(j++ / 20) + p.x,
+          p.createNoise(j++) + p.y
+        )
+      }
+    }
+  }
+}
+
+var sketch2 = function(p) {
   p.sep = 80;
   p.canvasWidth = 1600;
   p.canvasHeight = 800;
-  p.lineHeight = 40;
-  p.letW = 20;
+  p.lineHeight = 30;
+  p.letW = 15;
   p.t = 0;
 
   p.setup = function() {
@@ -27,13 +71,13 @@ var sketch1 = function(p) {
         p.stroke('#fff')
     
         p.curve (
-          p.createNoise(i) + p.x,
-          p.createNoise( j * p.t/1000) + p.y,
+          p.createNoise(p.t/1000),
+          p.createNoise(j * p.t/3000) + p.y,
           p.x,
           p.y + p.lineHeight,
-          p.x,
-          p.y,
-          p.createNoise(j++) + p.x,
+          p.x + p.cos(p.t/40)*80,
+          p.y - p.sin(p.t/30)*50,
+          p.createNoise(j++) + p.y,
           p.createNoise(j++) + p.y
         )
       }
@@ -44,46 +88,5 @@ var sketch1 = function(p) {
 
 var myp51 = new p5(sketch1);
 var myp51 = new p5(sketch2);
-
-
-// var sep = 80;
-// var canvasWidth = 1600;
-// var canvasHeight = 800;
-// var lineHeight = 40;
-// var letW = 20;
-// var t = 0;
-
-// function setup() {
-//   createCanvas(canvasWidth, canvasHeight);
-// }
-
-// function createNoise(index) {
-//   return map(noise(index), 0, 1, 0, letW*50);
-// }
-
-// function draw() {
-//   background(51);
-//   t++;
-
-//   for (var i = 0; i * sep < canvasWidth; i++) {
-//     for (var j = 0; j * lineHeight < canvasHeight; j++) {
-//       var x = i * sep;
-//       var y = j * lineHeight;
-//       noFill()
-//       stroke('#fff')
-  
-//       curve (
-//         createNoise(i) + x,
-//         createNoise(j*t/1000) + y,
-//         x,
-//         y + lineHeight,
-//         x,
-//         y,
-//         createNoise(j++) + x,
-//         createNoise(j++) + y
-//       )
-//     }
-//   }
-// }
 
 
