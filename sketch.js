@@ -2,8 +2,8 @@ var sketch1 = function(p) {
   
   p.canvasWidth = 1600;
   p.canvasHeight = 800;
-  p.lineHeight = 48;
-  p.sep = 40;
+  p.lineHeight = 24;
+  p.sep = 16;
   p.letW = 16;
   p.t = 0;
 
@@ -20,25 +20,34 @@ var sketch1 = function(p) {
     p.background(51);
     p.t++;
 
-    for (var i = 0; i * p.sep < p.canvasWidth; i++) {
-      for (var j = 0; j * p.lineHeight < p.canvasHeight; j++) {
-        p.x = i * p.sep;
+    for (i = 0, y = 0; i * p.sep < p.canvasWidth; i++) {
+      for (j = 0; j * p.lineHeight < p.canvasHeight; j++) {
+        if (p.random() > 0.3) {
+          p.x = i * p.sep;
+        } else {
+          p.x = i * p.sep + 80;
+        }
+         
         p.y = j * p.lineHeight;
-        p.noFill()
-        p.stroke('#fff')
+        p.noFill();
+        p.stroke('#fff');
+        if (p.random()<0.005) {
+          i += 10 * p.random();
+        }
     
         p.curve (
           p.createNoise(i) + p.x,
-          p.createNoise(i * 500) + p.y,
+          p.createNoise(i * 300) + p.y,
           p.x,
-          p.y + p.lineHeight,
-          p.x - 16,
+          p.y + p.lineHeight * 2,
+          p.x - 16 * j / 24,
           p.y + 40,
           p.createNoise(j++ / 20) + p.x,
           p.createNoise(j++) + p.y
         )
       }
     }
+    p.noLoop();
   }
 }
 
