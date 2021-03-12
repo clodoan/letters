@@ -7,17 +7,26 @@ var t = 0;
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
+  checkScreen();
 }
 
-function mousePressed() {
-  redraw();
-}
+// function mousePressed() {
+//   redraw();
+// }
 
 function createNoise(index) {
   return 100/noise(index) - 10;
 }
 
+function checkScreen() {
+  if (windowWidth<900) {
+    alert("please open this in desktop");
+    noLoop();
+  } 
+}
+
 function draw(){
+  
   background(51);
   t++;
 

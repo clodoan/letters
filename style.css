@@ -3,6 +3,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    grid-template-rows: auto 1fr;
+    margin-top: 40px;
 }
 
 canvas {

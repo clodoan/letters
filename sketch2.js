@@ -11,7 +11,6 @@ var sketch1 = function(p) {
     p.createCanvas(p.canvasWidth, p.canvasHeight);
   }
 
-
   p.createNoise = function(index) {
     return 100/p.noise(index) - 10;
   }
